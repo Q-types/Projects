@@ -84,6 +84,33 @@ DATASETS = {
         "kaggle_id": "niclowe/who-cases-dataset-and-wdi-country-population",
         "files": ["WHO_full_data2003.csv", "API_SP.POP.TOTL_DS2_en_excel_v2_887218.xls"]
     },
+    
+    # Hourly energy consumption (PJM interconnection)
+    "pjm_energy": {
+        "kaggle_id": "robikscube/hourly-energy-consumption",
+        "files": [
+            "est_hourly.paruqet",
+            "PJMW_hourly.csv",
+            "pjm_hourly_est.csv",
+            "PJM_Load_hourly.csv",
+            "DAYTON_hourly.csv",
+            "NI_hourly.csv",
+            "PJME_hourly.csv",
+            "FE_hourly.csv",
+            "DOM_hourly.csv",
+            "EKPC_hourly.csv",
+            "DEOK_hourly.csv",
+            "DUQ_hourly.csv",
+            "AEP_hourly.csv",
+            "COMED_hourly.csv",
+        ]
+    },
+    
+    # Convenience alias for pjm_hourly_est.csv
+    "pjm_hourly": {
+        "kaggle_id": "robikscube/hourly-energy-consumption",
+        "files": ["pjm_hourly_est.csv"]
+    },
     # Add more as needed
 }
 
