@@ -1,0 +1,76 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+
+# Virtual environments
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Data files (large datasets)
+*.csv
+*.h5
+*.hdf5
+*.parquet
+*.pkl
+*.pickle
+*.joblib
+data_science/datasets/raw/*
+data_science/datasets/processed/*
+
+# Keep dataset directories but ignore contents
+!data_science/datasets/raw/.gitkeep
+!data_science/datasets/processed/.gitkeep
+
+# Models (large files)
+*.h5
+*.hdf5
+*.pb
+*.pt
+*.pth
+*.ckpt
+data_science/models/*
+!data_science/models/.gitkeep
+
+# DVC
+.dvc/cache/
+.dvc/tmp/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Reports/outputs
+data_science/reports/*.html
+data_science/reports/*.pdf
+!data_science/reports/.gitkeep

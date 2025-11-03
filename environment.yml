@@ -1,0 +1,27 @@
+name: base_ds
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - jupyterlab
+  - numpy[version='<2.0']
+  - matplotlib
+  - ruff
+  - scikit-learn
+  - black
+  - seaborn
+  - ipykernel
+  - pandas
+  - polars
+  - plotly
+  - statsmodels
+  - pmdarima
+  - scipy
+  - fastparquet
+  - pyarrow
+  - openpyxl
+  - pytorch
+  - torchvision
+  - torchaudio
+  - u8darts
+prefix: /opt/homebrew/Caskroom/miniforge/base/envs/base_ds
