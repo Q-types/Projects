@@ -12,17 +12,77 @@ import shutil
 
 # Dataset registry - centralized source of truth
 DATASETS = {
+    # Complete time series dataset collection
+    "tsdata": {
+        "kaggle_id": "konradb/tsdata-1",
+        "files": [
+            "medium_posts.csv",
+            "daily-minimum-temperatures-in-me.csv",
+            "example_air_passengers.csv",
+            "google_chg.csv",
+            "outdoor-temperature-12UTC.csv",
+            "exp1.csv",
+            "exp2.csv",
+            "quarterly_gdp_change.csv",
+            "irish_electricity_daily.xlsx",
+            "Sample - Superstore.xls",
+            "ex1_wiki_visits.csv",
+            "arma_series2.csv",
+            "example_wp_log_R_outliers2.csv",
+            "diabetic.csv",
+            "ambient_temperature_system_failure.csv",
+            "rossman_sales.csv",
+            "energy_daily.csv",
+            "example_retail_sales.csv",
+            "avocado.csv",
+            "example_wp_log_R_outliers1.csv",
+            "iroots.png",
+            "passengers.csv",
+            "exp3.csv",
+            "us_energy.csv",
+            "passengers_test.csv",
+            "irish_electricity.csv",
+            "tesla_prices_5y.csv",
+            "passengers_train.csv",
+            "example_wp_log_peyton_manning.csv",
+            "dataset_temperature.csv",
+            "sunspots.csv",
+            "arma_series3.csv",
+            "Fremont_Bridge.csv",
+            "us_covid.csv",
+            "arma_series1.csv",
+            "savings_change.csv",
+            "wiki_log_R.csv",
+            "irish_electricity_daily.csv",
+        ]
+    },
+    
+    # Convenience aliases for commonly used datasets
     "us_covid": {
         "kaggle_id": "konradb/tsdata-1",
         "files": ["us_covid.csv"]
     },
+    "passengers": {
+        "kaggle_id": "konradb/tsdata-1",
+        "files": ["example_air_passengers.csv", "passengers.csv", "passengers_train.csv", "passengers_test.csv"]
+    },
+    "avocado": {
+        "kaggle_id": "konradb/tsdata-1",
+        "files": ["avocado.csv"]
+    },
+    "energy": {
+        "kaggle_id": "konradb/tsdata-1",
+        "files": ["energy_daily.csv", "us_energy.csv"]
+    },
+    "irish_electricity": {
+        "kaggle_id": "konradb/tsdata-1",
+        "files": ["irish_electricity.csv", "irish_electricity_daily.csv", "irish_electricity_daily.xlsx"]
+    },
+    
+    # WHO health data
     "who_cases": {
         "kaggle_id": "niclowe/who-cases-dataset-and-wdi-country-population",
         "files": ["WHO_full_data2003.csv", "API_SP.POP.TOTL_DS2_en_excel_v2_887218.xls"]
-    },
-    "passengers": {
-        "kaggle_id": "konradb/tsdata-1",
-        "files": ["example_air_passengers.csv"]
     },
     # Add more as needed
 }
