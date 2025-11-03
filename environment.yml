@@ -17,9 +17,13 @@ dependencies:
   - statsmodels
   - pmdarima
   - scipy
+  - prophet
   - fastparquet
   - pyarrow
   - openpyxl
+  - pip
+  - pip:
+    - kagglehub
   - pytorch
   - torchvision
   - torchaudio
