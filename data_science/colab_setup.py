@@ -105,3 +105,13 @@ class CFG:
     data_folder = project_root / "data_science" / "datasets" / "raw"
     img_dim1 = 15
     img_dim2 = 5
+    imgr_dim1 = 6
+    imgr_dim2 = 4
+    imgr2_dim1 = 7.5
+    imgr2_dim2 = 5
+    imgj_dim1 = 3.5
+    imgj_dim2 = 2.5
+    imgj2_dim1 = 7.2
+    imgj2_dim2 = 3.5
+    imgp_dim1 = 10
+    imgp_dim2 = 5.625
