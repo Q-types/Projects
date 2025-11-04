@@ -1,0 +1,91 @@
+{
+  "timestamp": "2025-11-04T10:52:56.502739",
+  "script_pricing": {
+    "com": 12.99,
+    "ai": 89.99
+  },
+  "validation": {
+    "com_domains": {
+      "valid": true,
+      "script_price": 12.99,
+      "typical_price": 12.99,
+      "range": [
+        9.99,
+        15.99
+      ]
+    },
+    "ai_domains": {
+      "valid": true,
+      "script_price": 89.99,
+      "typical_price": 89.99,
+      "range": [
+        77.99,
+        100.0
+      ]
+    },
+    "overall_accurate": true
+  },
+  "registrar_pricing": {
+    "onlydomains": {
+      ".ai": 77.99,
+      ".com": 12.99,
+      "note": "OnlyDomains offers competitive .ai pricing"
+    },
+    "namehero": {
+      ".ai": 160.0,
+      ".com": 12.99,
+      "note": "NameHero typical pricing"
+    },
+    "typical_registrar": {
+      ".ai": 89.99,
+      ".com": 12.99,
+      "note": "Industry average for standard registrars"
+    },
+    "premium_range": {
+      ".ai": {
+        "min": 77.99,
+        "max": 100.0
+      },
+      ".com": {
+        "min": 9.99,
+        "max": 15.99
+      },
+      "note": "Typical range across major registrars"
+    }
+  },
+  "pricing_facts": {
+    "ai_domains": {
+      "typical_cost": 89.99,
+      "range": [
+        77.99,
+        100.0
+      ],
+      "registration_period": "2 years minimum in many registrars",
+      "wholesale_cost": "Set by Government of Anguilla - high",
+      "notes": [
+        ".ai is technically Anguilla's ccTLD",
+        "Wholesale price is expensive due to high demand",
+        "Some registrars offer 1-year, others require 2-year minimum",
+        "OnlyDomains: ~$77.99/year (competitive)",
+        "NameHero: ~$160 for 2 years (~$80/year)",
+        "Most registrars: $80-100 per year"
+      ]
+    },
+    "com_domains": {
+      "typical_cost": 12.99,
+      "range": [
+        9.99,
+        15.99
+      ],
+      "registration_period": "1 year standard",
+      "wholesale_cost": "Regulated by Verisign - lower",
+      "notes": [
+        "Most common TLD globally",
+        "Highly competitive pricing",
+        "Renewal costs typically $12-15",
+        "First-year promotions often available ($0.99-$9.99)",
+        "Standard retail: $12-15/year"
+      ]
+    }
+  }
+}

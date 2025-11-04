@@ -1,0 +1,14 @@
+# AI Domain Finder Requirements
+# Python 3.7+
+
+# Core dependencies
+requests>=2.31.0
+python-whois>=0.8.0
+
+# Syllable counting (optional but recommended)
+syllables>=1.0.7
+
+# Natural Language Toolkit for word corpus (optional)
+nltk>=3.8.1
+
+# Additional utilities
