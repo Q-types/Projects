@@ -13,15 +13,23 @@ try:
     import google.colab
     IN_COLAB = True
     
-    # Clone the repo if not already present
+    # 1. Mount Google Drive (for custom datasets)
+    from google.colab import drive
+    drive.mount('/content/drive')
+    
+    # 2. Clone the repo if not already present
     if not Path('Projects').exists():
         !git clone https://github.com/Q-types/Projects.git
     
-    # Add utils to path
+    # 3. Add utils to path
     sys.path.insert(0, '/content/Projects')
     
-    # Change to notebooks directory
+    # 4. Change to notebooks directory
     %cd /content/Projects/data_science/scripts
+    
+    print("✅ Colab setup complete!")
+    print("   - Drive mounted: /content/drive/MyDrive")
+    print("   - Repo cloned: /content/Projects")
     
 except ImportError:
     IN_COLAB = False
