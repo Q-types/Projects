@@ -1,0 +1,305 @@
+{
+  "meta": {
+    "version": "1.0",
+    "notes": "Hierarchical taxonomy for 9 Communik8 complaints. L1 = customer-visible symptoms. L2 = mechanisms/root causes.",
+    "levels": { "L1": "symptom/experience", "L2": "mechanism/root cause" }
+  },
+
+  "categories": {
+
+    "customer_service": {
+      "level": "L1",
+      "parents": ["communication_failures"],
+      "definition": "Negative experience interacting with service channels: long waits, unhelpful or rude staff, poor call/chat handling.",
+      "include": [
+        "long wait to answer calls",
+        "unhelpful or useless service",
+        "rude staff, laughed at me",
+        "no response to complaint email"
+      ],
+      "exclude": [
+        "website usability issues without staff interaction",
+        "delivery delays with no service interaction"
+      ],
+      "prototypes": [
+        "I waited a very long time for my call to be answered.",
+        "Customer service was useless and did not resolve my issue.",
+        "The staff were rude and laughed at me when I asked for help.",
+        "I never received a response to my complaint email."
+      ]
+    },
+
+    "store_experience": {
+      "level": "L1",
+      "parents": ["customer_service"],
+      "definition": "In-person experience at a retail location involving staff behaviour or support quality.",
+      "include": [
+        "rude or dismissive staff in store",
+        "in-store help with handset was refused or mocked"
+      ],
+      "exclude": [
+        "phone support delays",
+        "general customer service not tied to a store visit"
+      ],
+      "prototypes": [
+        "Store staff were rude when I needed handset help.",
+        "At the Riverside store the team laughed at me.",
+        "In-store support was disrespectful and unhelpful."
+      ]
+    },
+
+    "delivery": {
+      "level": "L1",
+      "parents": ["logistics_fulfillment"],
+      "definition": "Problems with promised delivery times or fulfillment of orders.",
+      "include": [
+        "late delivery compared to promise",
+        "order cancellation due to delay",
+        "handset took longer than stated to arrive"
+      ],
+      "exclude": [
+        "network coverage problems",
+        "contract issues unrelated to shipping"
+      ],
+      "prototypes": [
+        "My handset arrived far later than promised.",
+        "Delivery missed the 48-hour promise.",
+        "I cancelled the order because delivery was delayed for two weeks."
+      ]
+    },
+
+    "billing": {
+      "level": "L1",
+      "parents": ["information_systems"],
+      "definition": "Incorrect charges, duplicate payments, billing errors, or debt collection letters.",
+      "include": [
+        "charged twice",
+        "incorrect bill or invoice",
+        "debt collector letter after billing error"
+      ],
+      "exclude": [
+        "charging a phone battery",
+        "shipping fee disputes tied primarily to delivery"
+      ],
+      "prototypes": [
+        "I was charged twice in one month.",
+        "The bill was wrong and I refused to pay.",
+        "I received a debt collector's letter following a billing mistake."
+      ]
+    },
+
+    "coverage": {
+      "level": "L1",
+      "parents": ["network_infrastructure"],
+      "definition": "Poor mobile signal, inability to make/receive calls, patchy mobile data.",
+      "include": [
+        "can't make or receive calls due to signal",
+        "mobile internet connection is patchy",
+        "coverage in my area is rubbish"
+      ],
+      "exclude": [
+        "Wi-Fi router problems at home",
+        "account or billing outages"
+      ],
+      "prototypes": [
+        "Coverage in my area is very poor.",
+        "I cannot make or receive calls because of bad signal.",
+        "The mobile data connection keeps dropping."
+      ]
+    },
+
+    "website_chat": {
+      "level": "L1",
+      "parents": ["digital_channel_design", "communication_failures"],
+      "definition": "Website or chat usability/support problems: limited channels, irrelevant or ungrammatical responses.",
+      "include": [
+        "website is a joke",
+        "only way to ask questions is chat",
+        "chat responses irrelevant or ungrammatical"
+      ],
+      "exclude": [
+        "phone-based customer service",
+        "general product complaints"
+      ],
+      "prototypes": [
+        "The website is hard to use and support is only via chat.",
+        "Chat responses were irrelevant and ungrammatical.",
+        "Online help channels did not provide meaningful answers."
+      ]
+    },
+
+    "contract_cancellation": {
+      "level": "L1",
+      "parents": ["workflow_process", "policy_terms"],
+      "definition": "Cooling-off period misunderstandings, failed cancellation requests, or being tied into unwanted contracts.",
+      "include": [
+        "tried to cancel within 14-day cooling-off",
+        "told cancellation would occur automatically but it did not",
+        "tied into unwanted 24-month contract"
+      ],
+      "exclude": [
+        "refund processing time after a valid cancellation",
+        "delivery cancellations due solely to shipping delays"
+      ],
+      "prototypes": [
+        "I tried to cancel within the cooling-off period but it did not happen.",
+        "They said cancellation would occur automatically and it did not.",
+        "I am now tied into a long contract I do not want."
+      ]
+    },
+
+    "loyalty_retention": {
+      "level": "L1",
+      "parents": ["communication_failures", "workflow_process"],
+      "definition": "Risks to churn or complaints about lack of response despite long-term loyalty.",
+      "include": [
+        "loyal customer planning to cancel",
+        "waiting a month for response to complaint"
+      ],
+      "exclude": [
+        "generic dissatisfaction without loyalty mention"
+      ],
+      "prototypes": [
+        "I have been a loyal customer for years and plan to cancel.",
+        "No one replied to my complaint email for a month."
+      ]
+    },
+    
+    "communication_failures": {
+      "level": "L2",
+      "parents": [],
+      "definition": "Failures in receiving, routing, or answering customer communications across channels.",
+      "include": [
+        "long call wait times",
+        "unanswered emails or chats",
+        "irrelevant or low-quality agent responses"
+      ],
+      "exclude": [
+        "pure website UX without support content",
+        "network coverage unrelated to contact handling"
+      ],
+      "prototypes": [
+        "Customer messages are not answered promptly.",
+        "Contact centre queues are too long for the available staffing.",
+        "Agent responses are low quality or irrelevant."
+      ]
+    },
+
+    "workflow_process": {
+      "level": "L2",
+      "parents": [],
+      "definition": "Breakdowns in internal process execution: cancellations, escalations, ticket routing, SLA adherence.",
+      "include": [
+        "failed automatic cancellation",
+        "escalations not actioned",
+        "tickets not routed across departments"
+      ],
+      "exclude": [
+        "frontline rudeness without process failure",
+        "billing math errors in isolation"
+      ],
+      "prototypes": [
+        "Cancellation requests are not executed correctly.",
+        "Cases are not handed off between teams with clear ownership.",
+        "SLA breaches occur due to poor process control."
+      ]
+    },
+
+    "information_systems": {
+      "level": "L2",
+      "parents": [],
+      "definition": "Data integrity and transactional consistency problems in billing/CRM/ordering systems.",
+      "include": [
+        "duplicate charges",
+        "incorrect invoices",
+        "inconsistent account state after payment"
+      ],
+      "exclude": [
+        "network coverage issues",
+        "website layout problems"
+      ],
+      "prototypes": [
+        "The billing system produced a duplicate charge.",
+        "Account balances are inconsistent after payment.",
+        "Invoices contain incorrect amounts due to data errors."
+      ]
+    },
+
+    "logistics_fulfillment": {
+      "level": "L2",
+      "parents": [],
+      "definition": "Operational failures in warehousing, dispatch, carrier performance, or ETA promises.",
+      "include": [
+        "late shipment versus promise",
+        "poor carrier performance",
+        "incorrect ETA communication"
+      ],
+      "exclude": [
+        "in-store pickup problems",
+        "contract administration issues"
+      ],
+      "prototypes": [
+        "Orders are delivered later than the promised timeframe.",
+        "Carrier performance causes missed delivery windows.",
+        "ETA promises are not aligned with actual capacity."
+      ]
+    },
+
+    "network_infrastructure": {
+      "level": "L2",
+      "parents": [],
+      "definition": "Radio access and backhaul limitations impacting signal and data connectivity in an area.",
+      "include": [
+        "poor signal coverage in area",
+        "dropped calls",
+        "patchy mobile data"
+      ],
+      "exclude": [
+        "home Wi-Fi problems",
+        "app bugs unrelated to the network"
+      ],
+      "prototypes": [
+        "Signal strength is insufficient to maintain calls.",
+        "The mobile network coverage is poor in this location.",
+        "Data connection is unstable and frequently drops."
+      ]
+    },
+
+    "digital_channel_design": {
+      "level": "L2",
+      "parents": [],
+      "definition": "Usability and content quality of website/chat channels including NLP/chatbot responses.",
+      "include": [
+        "chat only support with poor answers",
+        "website makes it hard to ask questions"
+      ],
+      "exclude": [
+        "phone call queues",
+        "billing calculation errors"
+      ],
+      "prototypes": [
+        "The website funnels all support into a limited chat channel.",
+        "Chat responses are irrelevant and poorly written.",
+        "Self-service flow does not answer common questions."
+      ]
+    },
+
+    "policy_terms": {
+      "level": "L2",
+      "parents": [],
+      "definition": "Product/contract terms, cooling-off rules, and their operational interpretation.",
+      "include": [
+        "cooling-off period cancellation rules not honoured",
+        "auto-cancel policy promised but not executed"
+      ],
+      "exclude": [
+        "delivery or billing issues not tied to policy"
+      ],
+      "prototypes": [
+        "Cooling-off cancellations should be honoured within the period.",
+        "Automatic cancellation policies must be implemented consistently.",
+        "Contract terms must not lock customers in after a valid cancellation."
+      ]
+    }
+  }
+}
