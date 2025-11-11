@@ -115,34 +115,11 @@ DATASETS = {
 }
 
 
-def get_data_folder(check_drive=True, prefer_drive=False):
-    """
-    Get the raw data folder path (works in local and Colab).
-    
-    In Colab, checks both Drive (for custom data) and cloned repo (for Kaggle downloads).
-    
-    Args:
-        check_drive (bool): If True and in Colab, check if Drive is mounted
-        prefer_drive (bool): If True, prefer Drive over repo location in Colab
-    """
+def get_data_folder():
+    """Get the raw data folder path (works in local and Colab)"""
     try:
         import google.colab
-        
-        # Check if Drive is mounted
-        drive_path = Path('/content/drive/MyDrive/Projects/data_science/datasets/raw')
-        repo_path = Path('/content/Projects/data_science/datasets/raw')
-        
-        if check_drive and drive_path.exists():
-            # Drive is mounted
-            if prefer_drive:
-                return drive_path
-            # For backwards compatibility, return repo path by default
-            # This keeps Kaggle downloads in the repo location
-            return repo_path
-        
-        # Drive not mounted or check_drive=False - use cloned repo location
-        return repo_path
-        
+        return Path('/content/Projects/data_science/datasets/raw')
     except ImportError:
         # Local - find project root
         current = Path.cwd()
@@ -152,67 +129,24 @@ def get_data_folder(check_drive=True, prefer_drive=False):
         return Path.cwd() / 'data_science' / 'datasets' / 'raw'
 
 
-def ensure_dataset(dataset_key, kaggle_id=None, force_download=False):
+def ensure_dataset(dataset_key, force_download=False):
     """
     Ensure dataset is available, download if needed.
     
-    If dataset_key is not in registry and kaggle_id is provided,
-    the dataset will be automatically downloaded and added to the registry.
-    
     Args:
-        dataset_key (str): Key from DATASETS registry (or new key name)
-        kaggle_id (str, optional): Kaggle dataset ID (e.g., "username/dataset-name")
-                                   Required if dataset_key not in registry
+        dataset_key (str): Key from DATASETS registry
         force_download (bool): Re-download even if files exist
         
     Returns:
         Path: Path to the data folder
         
-    Examples:
-        >>> # Use existing dataset
+    Example:
         >>> data_folder = ensure_dataset("us_covid")
         >>> df = pd.read_csv(data_folder / "us_covid.csv")
-        
-        >>> # Auto-download new dataset
-        >>> data_folder = ensure_dataset("my_new_data", kaggle_id="username/my-dataset")
-        >>> # Dataset is now available and added to registry
     """
-    # If dataset not in registry, try to auto-download and register it
     if dataset_key not in DATASETS:
-        if kaggle_id is None:
-            raise ValueError(
-                f"Unknown dataset '{dataset_key}'. Available: {list(DATASETS.keys())}\n"
-                f"To add a new dataset, provide kaggle_id parameter:\n"
-                f"  ensure_dataset('{dataset_key}', kaggle_id='username/dataset-name')"
-            )
-        
-        print(f"🆕 New dataset '{dataset_key}' - downloading and registering...")
-        data_folder = get_data_folder()
-        data_folder.mkdir(parents=True, exist_ok=True)
-        
-        # Download from Kaggle
-        print(f"📥 Downloading from Kaggle: {kaggle_id}")
-        cache_path = kagglehub.dataset_download(kaggle_id)
-        
-        # Discover and copy files
-        files = []
-        for file in Path(cache_path).glob("*"):
-            if file.is_file():
-                dest = data_folder / file.name
-                shutil.copy2(file, dest)
-                files.append(file.name)
-                print(f"   Copied: {file.name}")
-        
-        # Register the dataset
-        DATASETS[dataset_key] = {
-            "kaggle_id": kaggle_id,
-            "files": files
-        }
-        print(f"✅ Dataset '{dataset_key}' registered with {len(files)} files")
-        print(f"✅ Dataset ready at: {data_folder}")
-        return data_folder
+        raise ValueError(f"Unknown dataset '{dataset_key}'. Available: {list(DATASETS.keys())}")
     
-    # Dataset exists in registry - proceed normally
     dataset_info = DATASETS[dataset_key]
     data_folder = get_data_folder()
     data_folder.mkdir(parents=True, exist_ok=True)
@@ -239,12 +173,26 @@ def ensure_dataset(dataset_key, kaggle_id=None, force_download=False):
     return data_folder
 
 
-def get_custom_data_path(filename):
+def get_custom_folder():
+    """Get the custom data folder path (works in local and Colab)"""
+    try:
+        import google.colab
+        return Path('/content/Projects/data_science/datasets/custom')
+    except ImportError:
+        # Local - find project root
+        current = Path.cwd()
+        for parent in [current] + list(current.parents):
+            if (parent / 'setup.py').exists():
+                return parent / 'data_science' / 'datasets' / 'custom'
+        return Path.cwd() / 'data_science' / 'datasets' / 'custom'
+
+
+def load_custom_dataset(filename):
     """
-    Get path to custom data file (works in local and Colab with Drive).
+    Load custom dataset from the custom folder.
     
-    Use this for custom CSV files you've uploaded to Drive or have locally.
-    In Colab, checks Drive first, then falls back to repo location.
+    Custom datasets are committed to git in datasets/custom/
+    and are available immediately without any downloads.
     
     Args:
         filename (str): Name of the file (e.g., "customer_feedback.csv")
@@ -253,39 +201,21 @@ def get_custom_data_path(filename):
         Path: Full path to the file
         
     Example:
-        >>> path = get_custom_data_path("customer_feedback.csv")
+        >>> import pandas as pd
+        >>> path = load_custom_dataset("customer_feedback.csv")
         >>> df = pd.read_csv(path)
     """
-    try:
-        import google.colab
-        
-        # In Colab: Check Drive first, then repo location
-        drive_path = Path('/content/drive/MyDrive/Projects/data_science/datasets/raw') / filename
-        repo_path = Path('/content/Projects/data_science/datasets/raw') / filename
-        
-        if drive_path.exists():
-            print(f"📁 Loading from Drive: {filename}")
-            return drive_path
-        elif repo_path.exists():
-            print(f"📦 Loading from repo: {filename}")
-            return repo_path
-        else:
-            print(f"⚠️  File not found: {filename}")
-            print(f"   Checked:")
-            print(f"   - Drive: {drive_path}")
-            print(f"   - Repo:  {repo_path}")
-            print(f"   💡 Tip: Upload to MyDrive/Projects/data_science/datasets/raw/")
-            return drive_path  # Return Drive path as default
-            
-    except ImportError:
-        # Local environment
-        data_folder = get_data_folder(check_drive=False)
-        file_path = data_folder / filename
-        
-        if not file_path.exists():
-            print(f"⚠️  Warning: File not found: {file_path}")
-        
-        return file_path
+    custom_folder = get_custom_folder()
+    file_path = custom_folder / filename
+    
+    if not file_path.exists():
+        raise FileNotFoundError(
+            f"Custom dataset '{filename}' not found at {file_path}\n"
+            f"Available custom datasets: {list(f.name for f in custom_folder.glob('*.csv')) if custom_folder.exists() else 'none'}"
+        )
+    
+    print(f"✅ Loading custom dataset: {filename}")
+    return file_path
 
 
 def list_datasets():

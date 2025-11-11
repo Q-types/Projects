@@ -13,41 +13,17 @@ try:
     import google.colab
     IN_COLAB = True
     
-    # 1. Mount Google Drive (for custom datasets)
-    from google.colab import drive
-    drive_mounted = False
-    
-    # Check if already mounted
-    if Path('/content/drive/MyDrive').exists():
-        print("✅ Drive already mounted")
-        drive_mounted = True
-    else:
-        try:
-            drive.mount('/content/drive', force_remount=False)
-            drive_mounted = True
-            print("✅ Drive mounted successfully")
-        except Exception as e:
-            print(f"⚠️  Drive mount failed: {e}")
-            print("   You can still use Kaggle datasets without Drive")
-            print("   To fix: Runtime → Manage Sessions → Terminate, then restart")
-    
-    # 2. Clone the repo if not already present
+    # Clone the repo if not already present
     if not Path('Projects').exists():
         !git clone https://github.com/Q-types/Projects.git
-        print("✅ Repo cloned")
-    else:
-        print("✅ Repo already present")
     
-    # 3. Add utils to path
+    # Add utils to path
     sys.path.insert(0, '/content/Projects')
     
-    # 4. Change to notebooks directory
+    # Change to notebooks directory
     %cd /content/Projects/data_science/scripts
     
-    print("\n✅ Colab setup complete!")
-    if drive_mounted:
-        print("   📁 Custom data available from: /content/drive/MyDrive")
-    print("   📦 Kaggle datasets will download to: /content/Projects")
+    print("✅ Colab setup complete!")
     
 except ImportError:
     IN_COLAB = False

@@ -52,6 +52,10 @@ data_science/datasets/processed/*
 !data_science/datasets/raw/.gitkeep
 !data_science/datasets/processed/.gitkeep
 
+# Allow custom datasets to be committed
+!data_science/datasets/custom/
+!data_science/datasets/custom/*.csv
+
 # Models (large files)
 *.h5
 *.hdf5
