@@ -115,25 +115,33 @@ DATASETS = {
 }
 
 
-def get_data_folder(check_drive=True):
+def get_data_folder(check_drive=True, prefer_drive=False):
     """
     Get the raw data folder path (works in local and Colab).
     
     In Colab, checks both Drive (for custom data) and cloned repo (for Kaggle downloads).
     
     Args:
-        check_drive (bool): If True and in Colab, prefer Drive if mounted
+        check_drive (bool): If True and in Colab, check if Drive is mounted
+        prefer_drive (bool): If True, prefer Drive over repo location in Colab
     """
     try:
         import google.colab
         
-        # Check if Drive is mounted and prefer it for custom data
+        # Check if Drive is mounted
         drive_path = Path('/content/drive/MyDrive/Projects/data_science/datasets/raw')
-        if check_drive and drive_path.exists():
-            return drive_path
+        repo_path = Path('/content/Projects/data_science/datasets/raw')
         
-        # Fall back to cloned repo location (for Kaggle downloads)
-        return Path('/content/Projects/data_science/datasets/raw')
+        if check_drive and drive_path.exists():
+            # Drive is mounted
+            if prefer_drive:
+                return drive_path
+            # For backwards compatibility, return repo path by default
+            # This keeps Kaggle downloads in the repo location
+            return repo_path
+        
+        # Drive not mounted or check_drive=False - use cloned repo location
+        return repo_path
         
     except ImportError:
         # Local - find project root
@@ -235,8 +243,8 @@ def get_custom_data_path(filename):
     """
     Get path to custom data file (works in local and Colab with Drive).
     
-    Use this for custom CSV files you've uploaded to Drive.
-    Automatically handles local vs Colab paths.
+    Use this for custom CSV files you've uploaded to Drive or have locally.
+    In Colab, checks Drive first, then falls back to repo location.
     
     Args:
         filename (str): Name of the file (e.g., "customer_feedback.csv")
@@ -248,19 +256,36 @@ def get_custom_data_path(filename):
         >>> path = get_custom_data_path("customer_feedback.csv")
         >>> df = pd.read_csv(path)
     """
-    data_folder = get_data_folder(check_drive=True)
-    file_path = data_folder / filename
-    
-    if not file_path.exists():
-        print(f"⚠️  Warning: File not found: {file_path}")
-        print(f"   Make sure file is in: {data_folder}")
-        try:
-            import google.colab
-            print(f"   💡 Tip: Mount Drive and upload to MyDrive/Projects/data_science/datasets/raw/")
-        except ImportError:
-            pass
-    
-    return file_path
+    try:
+        import google.colab
+        
+        # In Colab: Check Drive first, then repo location
+        drive_path = Path('/content/drive/MyDrive/Projects/data_science/datasets/raw') / filename
+        repo_path = Path('/content/Projects/data_science/datasets/raw') / filename
+        
+        if drive_path.exists():
+            print(f"📁 Loading from Drive: {filename}")
+            return drive_path
+        elif repo_path.exists():
+            print(f"📦 Loading from repo: {filename}")
+            return repo_path
+        else:
+            print(f"⚠️  File not found: {filename}")
+            print(f"   Checked:")
+            print(f"   - Drive: {drive_path}")
+            print(f"   - Repo:  {repo_path}")
+            print(f"   💡 Tip: Upload to MyDrive/Projects/data_science/datasets/raw/")
+            return drive_path  # Return Drive path as default
+            
+    except ImportError:
+        # Local environment
+        data_folder = get_data_folder(check_drive=False)
+        file_path = data_folder / filename
+        
+        if not file_path.exists():
+            print(f"⚠️  Warning: File not found: {file_path}")
+        
+        return file_path
 
 
 def list_datasets():
