@@ -56,6 +56,9 @@ data_science/datasets/processed/*
 !data_science/datasets/custom/
 !data_science/datasets/custom/*.csv
 
+# Allow manual labels for mini projects
+!data_science/mini_projects/*/data/manual_labels.csv
+
 # Models (large files)
 *.h5
 *.hdf5
