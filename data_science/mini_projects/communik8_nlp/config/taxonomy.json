@@ -172,16 +172,24 @@
       "include": [
         "long call wait times",
         "unanswered emails or chats",
-        "irrelevant or low-quality agent responses"
+        "irrelevant or low-quality agent responses",
+        "emails were never acknowledged",
+        "they didn’t return my call",
+        "I waited for a promised call back",
+        "they said they would fix the problem but nothing happened",
+        "I had to call back about the same issue repeatedly",
+        "I was transferred between multiple departments without resolution"
       ],
       "exclude": [
         "pure website UX without support content",
         "network coverage unrelated to contact handling"
       ],
       "prototypes": [
-        "Customer messages are not answered promptly.",
-        "Contact centre queues are too long for the available staffing.",
-        "Agent responses are low quality or irrelevant."
+        "The company did not acknowledge my emails or chat messages.",
+        "I was transferred between several departments without anyone solving the issue.",
+        "I waited a very long time for a call back that never came.",
+        "Agents promised to fix the problem but no action was taken.",
+        "I had to repeatedly call back because the issue was never resolved."
       ]
     },
 
@@ -192,16 +200,21 @@
       "include": [
         "failed automatic cancellation",
         "escalations not actioned",
-        "tickets not routed across departments"
+        "tickets not routed across departments",
+        "a ticket was raised but never answered",
+        "changes made on the website had no effect on the account",
+        "a request was submitted but received no follow-up"
       ],
       "exclude": [
         "frontline rudeness without process failure",
         "billing math errors in isolation"
       ],
       "prototypes": [
-        "Cancellation requests are not executed correctly.",
-        "Cases are not handed off between teams with clear ownership.",
-        "SLA breaches occur due to poor process control."
+        "My cancellation request was not processed by the system.",
+        "A ticket was created but no department followed up on it.",
+        "Escalations were logged but no one took ownership of the issue.",
+        "Changes made through the online account did not update in the system.",
+        "I submitted a service request but never received any response."
       ]
     },
 
